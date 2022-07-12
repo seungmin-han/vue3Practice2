@@ -1,26 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view />
+  
+  <Navigation></Navigation>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { useUserStore } from "@/stores/user";
+import { useRoute } from 'vue-router';
+import { onMounted } from '@vue/runtime-core';
+import { Navigation } from '@/components/modules';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components : { 
+    Navigation 
+  }
+  , setup() {
+    const user = useUserStore();
+    const route = useRoute();
+    const index = onMounted(()=> {route.params.index});
+    const page = onMounted(()=> {route.params.page});
+
+    return {
+      user
+      , index
+      , page
+    }
   }
 }
+
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  > * {
+    margin: 0 20px;
+  }
 }
 </style>
