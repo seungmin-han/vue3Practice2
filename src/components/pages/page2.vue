@@ -2,7 +2,7 @@
     <Header></Header>
     <h1>페이지2-{{user.subPage}}</h1>
     <hr>
-    <router-link v-if="next < 6" :to="{name:'page2sub', params:{index:user.index, page:1, subPage:next}}">다음페이지</router-link>
+    <router-link v-if="next < 6" :to="{name : 'page2sub', params:{subPage:next}}">다음페이지</router-link>
     <router-link v-else to="/">메인페이지</router-link>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     , components : {
         Header
     }
-    , props: ["page", "index", "subPage"]
+    , props: ["subPage"]
     , setup() {
         const user = useUserStore();
         const route = useRoute();

@@ -4,9 +4,9 @@
     <hr>
     <div>
         <div class="tabMenu">
-            <div :class="{'active' : currentTab==0}" class="tab" @click="$router.push({name: 'page3', params:{index:user.index, page:2, currentTab:0}})">3-1</div>
-            <div :class="{'active' : currentTab==1}" class="tab" @click="$router.push({name: 'page3', params:{index:user.index, page:2, currentTab:1}})" >3-2</div>
-            <div :class="{'active' : currentTab==2}" class="tab" @click="$router.push({name: 'page3', params:{index:user.index, page:2, currentTab:2}})" >3-3</div>
+            <div :class="{'active' : currentTab==0}" class="tab" @click="switchTab(0)">3-1</div>
+            <div :class="{'active' : currentTab==1}" class="tab" @click="switchTab(1)">3-2</div>
+            <div :class="{'active' : currentTab==2}" class="tab" @click="switchTab(2)">3-3</div>
         </div>
         <div class="tabContentWrap">
             <div class="tabContent" v-show="currentTab == 0">
@@ -29,27 +29,24 @@
 import { Header } from "@/components/modules";
 import { useUserStore } from '@/stores/user';
 import { useRoute } from 'vue-router';
-import { computed } from '@vue/runtime-core';
+import { computed, reactive, ref } from "vue";
 export default {
     components : {
         Header
         , 
     }
-    , props: ["page", "index", "currentTab"]
     , name: "Page3"
     , setup() {
         const user = useUserStore();
-        const route = useRoute();
+        let currentTab = ref(0);
 
-        user.currentTab = computed(()=> {
-            return !route.params.currentTab ? 0 : route.params.currentTab;
-        });
         const switchTab = (idx) => {
-            
+            currentTab.value = idx;
         }
         return {
             user
             , switchTab
+            , currentTab
         }
     }
 }

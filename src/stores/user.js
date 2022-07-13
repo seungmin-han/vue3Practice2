@@ -4,16 +4,16 @@ import { computed, reactive, ref } from "vue";
 export const useUserStore = defineStore("useUserStore", () => {
 
     const index = ref(0);
-    const currentPage = ref(0);
+    const currentPage = ref("");
+    const isHideTab = false;
     const subPage = ref(1);
-    const currentTab = ref(0);
     const type = ref("A");
     const name = computed(()=> {
         return info[index.value].name;
     });
     const headerColor = computed(()=> {
         let color = "green";
-        if(currentPage.value == 0) 
+        if(currentPage.value == "HOME") 
         {
             if(index.value == 0) 
             {
@@ -61,7 +61,7 @@ export const useUserStore = defineStore("useUserStore", () => {
         , name
         , currentPage
         , subPage
-        , currentTab
+        , isHideTab
     }
 
 })

@@ -21,8 +21,6 @@ export default {
     name : "Header"
     , setup() {
         const user = useUserStore();
-        const route = useRoute();
-        user.currentPage = (!!route.params.page) ? route.params.page : 0;
         return {
             user
         }
