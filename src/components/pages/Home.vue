@@ -13,12 +13,6 @@
         <Cat v-if="user.info[user.index].animals.indexOf('고양이') > -1"></Cat>
         <Rabbit v-if="user.info[user.index].animals.indexOf('토끼') > -1"></Rabbit>
         <Lion v-if="user.info[user.index].animals.indexOf('사자') > -1"></Lion>
-        <!-- <table border="1" align="center">
-            <tr><th>동물</th></tr>
-            <tr v-for="(value, key) in user.info[user.index].animals" :key="key">
-                <td>{{value}}</td>
-            </tr>
-        </table> -->
     </div>
 </template>
 

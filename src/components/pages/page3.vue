@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <h3>페이지3</h3>
+    <h1>페이지3</h1>
     <hr>
     <div>
         <div class="tabMenu">

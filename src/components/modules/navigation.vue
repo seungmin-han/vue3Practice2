@@ -1,5 +1,4 @@
 <template>
-    {{user.isHideTab}}
   <div id="nav" v-if="!user.isHideTab">
       <router-link to="/">HOME</router-link>
       <router-link to="page2">Page 2</router-link>

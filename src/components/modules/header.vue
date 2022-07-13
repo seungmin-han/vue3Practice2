@@ -35,6 +35,10 @@ export default {
 
         color: #fff;
         font-size: 40px;
+        > div {
+            text-align: right;
+            padding: 0 40px;
+        }
         a {
             color: #fff;
         }

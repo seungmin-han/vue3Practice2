@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <h3>페이지4</h3>
+    <h1>페이지4</h1>
 </template>
 
 <script>
