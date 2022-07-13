@@ -18,6 +18,7 @@
 
 <script>
 import { useUserStore } from "@/stores/user"
+import { useRoute } from 'vue-router';
 import { Header } from '@/components/modules';
 import {Dog, Cat, Rabbit, Lion} from '@/components/animals';
 import { computed, reactive } from '@vue/runtime-core';
@@ -32,6 +33,11 @@ export default {
     }
     , setup() {
         const user = useUserStore();
+        const route = useRoute();
+        // meta name 
+        // proxy meta = name 
+
+        console.log('route',route.meta);
         const name = computed(()=> {
             return user.info[user.index].name;
         })

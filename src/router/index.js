@@ -2,15 +2,6 @@ import { createWebHistory, createRouter, useRoute } from "vue-router";
 import {Home, Page2, Page3, Page4 } from "@/components/pages";
 import { useUserStore } from "@/stores/user";
 
-const goHome = (to, from, next, user) => {
-	if(from.name === "HOME") {
-		user.currentPage = "HOME";
-		user.isHideTab = false;
-		next({name:"HOME"});
-	} else {
-		next();
-	}
-}
 
 const routes = [
   {
@@ -18,7 +9,21 @@ const routes = [
     , name: "HOME"
     , component: Home
     , meta: {
-		isHideTab : false
+		headerType:'A',
+		headerClass:'red',
+		isHideTab : false,
+		auth:[0,1,2,3]
+	},
+	beforeEnter(to){
+		const user = useUserStore();
+		const userAuth = user.index;
+		if( userAuth === 0 ){
+			to.meta.headerType = 'A';
+			to.meta.headerClass = 'red';
+		}else{
+			to.meta.headerType = 'C';
+			to.meta.headerClass = 'green';
+		}
 	}
   }
   , {
@@ -26,16 +31,16 @@ const routes = [
     , name: "page2"
     , component: Page2
     , meta: {
-        isHideTab : true
+		headerType:'B',
+		headerClass:'blue',
+        isHideTab : true,
+		auth:[1,2]
     }
 	, children: [
 		{
 			path: ':subPage'
 			, name: "page2sub"
     		, component: Page2
-			, meta: {
-				isHideTab : true
-			}
 			,props: true
 		}
 	]
@@ -46,7 +51,10 @@ const routes = [
     , name: "page3"
     , component: Page3
 	, meta: {
-		isHideTab : true
+		headerType:'B',
+		headerClass:'blue',
+		isHideTab : true,
+		auth:[3]
 	}
   }
   , {
@@ -54,7 +62,10 @@ const routes = [
     , name: "page4"
     , component: Page4
 	, meta: {
-		isHideTab : true
+		headerType:'B',
+		headerClass:'blue',
+		isHideTab : true,
+		auth:[0]
 	}
   }
 ];
@@ -66,49 +77,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 	const user = useUserStore();
-	user.currentPage = to.name;
-	user.isHideTab = to.meta.isHideTab;
-	console.log("fromName:",from.name, ", from.isHideTab:",from.meta.isHideTab);
-	console.log("toName:",to.name, ", to.isHideTab:",to.meta.isHideTab);
-	if(to.name=="page2") 
-	{
-		if(user.index == 1 || user.index == 2) 
-		{
-			next();
-		}
-		else 
-		{
-			goHome(to, from, next, user);
-		}
-	} 
-	else if (to.name == "page3")
-	{
-		if(user.index == 3) 
-		{
-			next();
-		}
-		else 
-		{
-			goHome(to, from, next, user);
-		}
-	}
-	else if (to.name == "page4")
-	{
-		if(user.index == 0) 
-		{
-			next();
-		}
-		else 
-		{
-			goHome(to, from, next, user);
-		}
-	} 
-	else
-	{
+	const isAuth = to.meta.auth.includes(user.index) ;
+	if( isAuth ){
 		next();
+	}else{
+		next({ name:'HOME' });
 	}
-	
-	
 })
 
 

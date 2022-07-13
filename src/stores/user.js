@@ -1,38 +1,9 @@
 import { defineStore } from "pinia";
-import { computed, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 
 export const useUserStore = defineStore("useUserStore", () => {
 
     const index = ref(0);
-    const currentPage = ref("");
-    const isHideTab = false;
-    const subPage = ref(1);
-    const type = ref("A");
-    const name = computed(()=> {
-        return info[index.value].name;
-    });
-    const headerColor = computed(()=> {
-        let color = "green";
-        if(currentPage.value == "HOME") 
-        {
-            if(index.value == 0) 
-            {
-                type.value = "A";
-                color = "red";
-            }
-            else 
-            {
-                type.value = "C";
-                color = "green";
-            }
-        } 
-        else
-        {
-            type.value = "B";
-            color = "blue";
-        }
-        return color;
-    });
 
     const info = reactive([
         {
@@ -56,12 +27,6 @@ export const useUserStore = defineStore("useUserStore", () => {
     return {
         index
         , info
-        , headerColor
-        , type
-        , name
-        , currentPage
-        , subPage
-        , isHideTab
     }
 
 })
