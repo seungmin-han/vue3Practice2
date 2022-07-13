@@ -4,7 +4,8 @@ import { reactive, ref } from "vue";
 export const useUserStore = defineStore("useUserStore", () => {
 
     const index = ref(0);
-
+    const subPage = ref(1);
+    
     const info = reactive([
         {
             name: "비회원"
@@ -27,6 +28,7 @@ export const useUserStore = defineStore("useUserStore", () => {
     return {
         index
         , info
+        , subPage
     }
 
 })
