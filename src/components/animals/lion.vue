@@ -1,13 +1,16 @@
 <template>
-    <div>사자</div>
+    <div class="component">사자 컴포넌트🦁</div>
 </template>
 
 <script>
 export default {
-    name: "Lion"
-}
+    name: "Lion",
+};
 </script>
 
-<style>
-
+<style scoped>
+div {
+    background-color: gold;
+    color: #000;
+}
 </style>

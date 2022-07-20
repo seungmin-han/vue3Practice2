@@ -1,13 +1,15 @@
 <template>
-    <div>토끼</div>
+    <div class="component">토끼 컴포넌트🐰</div>
 </template>
 
 <script>
 export default {
-    name: "Rabbit"
-}
+    name: "Rabbit",
+};
 </script>
 
-<style>
-
+<style scoped>
+div {
+    background-color: gray;
+}
 </style>

@@ -1,13 +1,15 @@
 <template>
-    <div>강아지</div>
+    <div class="component">강아지 컴포넌트🐶</div>
 </template>
 
 <script>
 export default {
-    name: "Dog"
-}
+    name: "Dog",
+};
 </script>
 
-<style>
-
+<style scoped>
+div {
+    background-color: brown;
+}
 </style>

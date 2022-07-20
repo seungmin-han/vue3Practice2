@@ -1,48 +1,51 @@
 <template>
     <Header></Header>
-    <h1>페이지2-{{user.subPage}}</h1>
-    <hr>
-    <router-link v-if="next < 6" :to="{name : 'page2sub', params:{subPage:next}}">다음페이지</router-link>
+    <h1>페이지2-{{ user.subPage }}</h1>
+    <img src="../../assets/logo.png" alt="Vue Logo" />
+    <hr />
+    <router-link
+        v-if="next < 6"
+        :to="{ name: 'page2sub', params: { subPage: next } }"
+        >다음페이지</router-link
+    >
     <router-link v-else to="/">메인페이지</router-link>
 </template>
 
 <script>
-import { useUserStore } from "@/stores/user"
-import { Header } from "@/components/modules"
-import { useRoute } from 'vue-router';
-import { computed } from '@vue/runtime-core';
-
+import { useUserStore } from "@/stores/user";
+import { Header } from "@/components/modules";
+import { useRoute } from "vue-router";
+import { computed } from "@vue/runtime-core";
 
 export default {
-    name: "Page2"
-    , components : {
-        Header
-    }
-    , props: ["subPage"]
-    , setup() {
+    name: "Page2",
+    components: {
+        Header,
+    },
+    props: ["subPage"],
+    setup() {
         const user = useUserStore();
         const route = useRoute();
-        
-        user.subPage = computed(()=> {
+
+        user.subPage = computed(() => {
             return !route.params.subPage ? 1 : route.params.subPage;
         });
 
-        const next = computed(()=> {
-            return parseInt(user.subPage)+1;
+        const next = computed(() => {
+            return parseInt(user.subPage) + 1;
         });
         return {
-            user
-            , next
-        }
-    }
-}
-
+            user,
+            next,
+        };
+    },
+};
 </script>
 
 <style>
-    a {
-        text-decoration: underline;
-        font-size: 24px;
-        cursor: pointer;
-    }
+a {
+    text-decoration: underline;
+    font-size: 24px;
+    cursor: pointer;
+}
 </style>
